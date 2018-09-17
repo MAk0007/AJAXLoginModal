@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 25px; /* Location of the box */
+	left: 77%;
+	top: 30%;
+	width: 22%; /* Full width */
+	height: 20%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal_content {
+	margin: auto;
+	padding: 0px;
+	border: aqua;
+	width: 90%;
+
+}
+
+/* The Close Button */
+span.close {
+padding-bottom:50px;
+	color: silver;
+	float: right;
+	font-size: 26px;
+	font-weight: bolder;
+}
+
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+body {
+	background-image: url("bg.jpg");
+	height: 200%;
+	background-position: unset;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+div.heading {
+	color: aqua;
+	text-align: center;
+}
+
+div.buttons {
+	background-image: url("Stainless-Steel.jpg");
+	text-align: right;
+}
+
+
+label.col{
+color:aqua;}
+
+td.errmsg{
+color:red}
+
+table.log{
+align-self: center;
+}
+
+
+</style>
+<head>
+<meta charset="utf-8" />
+<!-- <meta http-equiv="refresh" content="10"> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Home -somethingNEW</title>
+<meta name="author" content="Akram">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+<script src="angular.min.js"></script>
+
+
+
+	<script>
+	var request;
+	function login() {
+		var name = document.loginForm.uname.value;
+		var pass = document.loginForm.passw.value;
+		var url = "Connection.jsp?name="+name +"&pass="+pass;
+
+		if (window.XMLHttpRequest) {
+			request = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			request = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		try {
+			request.onreadystatechange = getInfo;
+			request.open("GET", url, true);
+			request.send();
+			window.location.href="HomePage.html";
+
+		} catch (e) {
+			alert("Unable to connect to server");
+		}
+	}
+
+	function getInfo() {
+		if (request.readyState == 4) {
+			var val = request.responseText;
+			document.getElementById('errorMessage').innerHTML = val;
+			document.loginForm.reset();
+		}
+	}
+	
+
+	</script>
+</head>
+<body>
+
+	<div class="heading">
+		<h1>Welcome</h1>
+		<marquee><h6>Many people will walk in and out of your life, but only true friends will leave footprints in your heart.</h6></marquee>
+	</div>
+	
+	<div class="buttons">
+		<button id="signin">sign-in</button>
+		<button id="signup">sign-up</button>
+	</div>
+	<div id="loginModal" class="modal" >
+		<div class="modal_content" id="modal_content">
+	<span class="close">&times;</span>
+	
+	<form name="loginForm">
+	<table class="log">
+			<tr>
+				<td><label class="col">Username</label></td>
+				<td><input type="text" placeholder="Enter Username" name="uname"> <br></td>
+			</tr>
+			<tr>
+				<td><label class="col">Password</label></td>
+				<td><input type="password" placeholder="Enter Password" name="passw"> <br></td>
+			</tr>
+			<tr>
+			<td colspan=3 class="errmsg"><span id="errorMessage"> </span></td>  
+			</tr>
+			<tr>
+				<td colspan=2 align="center"><input type="button" onclick="login()" value="Login"></td>
+			</tr>
+	</table>
+	</form>
+	
+	</div>
+	</div>
+
+	<script>
+		var modal = document.getElementById('loginModal');
+		var signin = document.getElementById("signin");
+		var span = document.getElementsByClassName("close")[0];
+		signin.onclick = function() {
+			modal.style.display = "block";
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+
+</body>
+</html>

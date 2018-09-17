@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.itc.Users" table="users">
+
+<!--  Specifies the primary key attribute in the class -->
+<id name="userid" column="userid">
+<!--  Used to generate the primary key -->
+<generator class="assigned" />
+</id>
+<property name="firstname" column="firstname" />
+<property name="lastname" column="lastname" />
+<property name="username" column="username" />
+<property name="password" column="password"/>
+<property name="designation" column="designation"/>
+
+</class>
+</hibernate-mapping>
+
